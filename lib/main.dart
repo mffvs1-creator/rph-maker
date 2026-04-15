@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '(M)/rph_maker/tela_personagens.dart';
 import '(M)/tela_personagens.dart';
 
 void main() {
@@ -15,7 +14,7 @@ class MeuAppRPG extends StatelessWidget {
       title: 'RPH Maker',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      // Aqui a main simplesmente "chama" a sua tela separada
+      // agora a main puxa a tela_personagens
       home: const TelaPersonagens(),
     );
   }

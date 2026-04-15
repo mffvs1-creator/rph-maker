@@ -8,9 +8,10 @@ class TelaPersonagens extends StatelessWidget {
   Widget build(BuildContext context) {
     // uma lista dos personagens
     final personagens = [
-      {'nome': 'Elara', 'classe': 'Guerreira', 'pv': '35/35', 'ca': '17'},
-      {'nome': 'Roric', 'classe': 'Mago', 'pv': '22/28', 'ca': '14'},
-      {'nome': 'Lyra', 'classe': 'Ladina', 'pv': '30/30', 'ca': '16'},
+      {'nome': 'Elara', 'classe': 'Guerreira', 'pv': '35/35', 'ca': '18'},
+      {'nome': 'Roric', 'classe': 'Mago', 'pv': '22/28', 'ca': '18'},
+      {'nome': 'Lyra', 'classe': 'Ladina', 'pv': '30/30', 'ca': '18'},
+      {'nome': 'Narya', 'classe': 'curador', 'pv': '20/20', 'ca': '18'},
     ];
 
     return Scaffold(
@@ -27,7 +28,7 @@ class TelaPersonagens extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             color: Colors.grey[850],
             child: ListTile(
-              leading: const Icon(Icons.shield, size: 35, color: Colors.white54),
+              leading: const Icon(Icons.heart_broken, size: 35, color: Colors.white54),
               title: Text(p['nome']!, style: const TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Text(p['classe']!),
               trailing: Text(
