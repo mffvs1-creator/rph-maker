@@ -5,7 +5,7 @@ class TelaPersonagens extends StatelessWidget {
 
   Widget buildCircleAvatar(String imagem) {
     return CircleAvatar(
-      radius: 50,
+      radius: 30,
       backgroundColor: Colors.amber[700],
       backgroundImage: NetworkImage(imagem),
     );
@@ -16,42 +16,42 @@ class TelaPersonagens extends StatelessWidget {
     // uma lista dos personagens
     final Telapersonagens = [
       {
-        'nome': 'Juno',
-        'classe': 'pistoleiro',
+        'nome': 'Julio',
+        'classe': 'Guerreiro',
         'pv': '35/35',
         'ca': '18',
         'imagem':
-            'https://i.pinimg.com/1200x/d6/59/01/d65901b6a4cd7b94f5c3ac943623e28d.jpg',
+            'https://i.pinimg.com/736x/eb/01/04/eb01044783b72a4140d5fa80ec28f104.jpg',
       },
       {
-        'nome': 'Rein',
-        'classe': 'Mago',
-        'pv': '22/28',
+        'nome': 'Elara',
+        'classe': 'arqueira',
+        'pv': '22/22',
         'ca': '18',
         'imagem':
-            'https://i.pinimg.com/736x/c6/42/63/c64263a7a299f0b7dee3510109233768.jpg',
+            'https://cdn.rafled.com/anime-icons/images/sN5EGhvu8EvZA35RXmT3tU8jQwOalzqK.jpg',
       },
       {
-        'nome': 'Lyra',
-        'classe': 'Ladina',
-        'pv': '30/30',
+        'nome': 'Lysandra',
+        'classe': 'curandeira',
+        'pv': '10/10',
         'ca': '18',
         'imagem':
-            'https://i.pinimg.com/736x/42/40/30/4240306f84552588be338fceed5bd1b9.jpg',
+            'https://cdn.rafled.com/anime-icons/images/f2avsZPYjzdLGSjT1Jrp63aKhRT8yyCW.jpg',
       },
       {
-        'nome': 'Narya',
-        'classe': 'Curador',
+        'nome': 'Kael',
+        'classe': 'invocador',
         'pv': '20/20',
         'ca': '18',
         'imagem':
-            'https://i.pinimg.com/1200x/34/28/aa/3428aa0ef52d25c869baff04d8f8be2e.jpg',
+            'https://images.cults3d.com/oB-W8h92wqml1soy2CeP5KL3gQQ=/516x516/filters:no_upscale():format(webp)/https://fbi.cults3d.com/uploaders/15449960/illustration-file/771a0ee5-c7a4-49c5-8b3a-6aea9fd34e31/images-2025-09-21T182621.668.jpg',
       },
     ];
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Personagens'),
+        title: const Text('TelaPersonagens'),
         backgroundColor: Colors.brown[800],
       ),
       body: ListView.builder(
