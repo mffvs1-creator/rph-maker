@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import '../rph_maker/personagem_model.dart';
 
 class TelaLuta extends StatefulWidget {
-  const TelaLuta({super.key});
+  final List<Personagem> personagens;
+
+  const TelaLuta({super.key, required this.personagens});
 
   @override
   State<TelaLuta> createState() => _TelaLutaState();
@@ -17,13 +19,6 @@ class _TelaLutaState extends State<TelaLuta> {
     {'nome': 'Torre', 'icon': Icons.castle, 'cor': Colors.purple},
   ];
 
-  final personagens = [
-  Personagem(nome: 'Nando', classe: 'Guerreira', pvAtual: 35, pvMax: 35, forca: 10, agilidade: 8, inteligencia: 6, ca: 18, imagem: ''),
-  Personagem(nome: 'Roric', classe: 'Mago', pvAtual: 22, pvMax: 28, forca: 10, agilidade: 8, inteligencia: 6, ca: 18, imagem: ''),
-  Personagem(nome: 'Lyra', classe: 'Ladina', pvAtual: 30, pvMax: 30, forca: 10, agilidade: 8, inteligencia: 6, ca: 18, imagem: ''),
-  Personagem(nome: 'Narya', classe: 'Curador', pvAtual: 20, pvMax: 20, forca: 10, agilidade: 8, inteligencia: 6, ca: 18, imagem: ''),
-];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +32,8 @@ class _TelaLutaState extends State<TelaLuta> {
               'Seus Personagens',
               ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: personagens.length,
-                itemBuilder: (_, i) => _cardPersonagem(personagens[i]),
+                itemCount: widget.personagens.length,
+                itemBuilder: (_, i) => _cardPersonagem(widget.personagens[i]),
               ),
             ),
           ),
@@ -61,7 +56,9 @@ class _TelaLutaState extends State<TelaLuta> {
             child: ElevatedButton.icon(
               onPressed: cenarioSelecionado.isNotEmpty
                   ? () => ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Iniciando em $cenarioSelecionado!')),
+                        SnackBar(
+                          content: Text('Iniciando em $cenarioSelecionado!'),
+                        ),
                       )
                   : null,
               icon: const Icon(Icons.shield),
@@ -79,7 +76,10 @@ class _TelaLutaState extends State<TelaLuta> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(titulo, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          Text(
+            titulo,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
           const SizedBox(height: 10),
           Expanded(child: conteudo),
         ],
@@ -89,17 +89,50 @@ class _TelaLutaState extends State<TelaLuta> {
 
   Widget _cardPersonagem(Personagem p) {
     return Container(
-      width: 100,
+      width: 110,
       margin: const EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: Colors.amber),
+        color: Colors.grey[850],
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(p.nome, style: const TextStyle(fontWeight: FontWeight.bold)),
-          Text('${p.pvAtual}/${p.pvMax}', style: const TextStyle(fontSize: 11)),
+          // Imagem do personagem
+          CircleAvatar(
+            radius: 28,
+            backgroundColor: Colors.amber[700],
+            backgroundImage: p.imagem.isNotEmpty
+                ? NetworkImage(p.imagem)
+                : null,
+            child: p.imagem.isEmpty
+                ? const Icon(Icons.person, color: Colors.white)
+                : null,
+          ),
+          const SizedBox(height: 6),
+          // Nome
+          Text(
+            p.nome,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontSize: 13,
+            ),
+            overflow: TextOverflow.ellipsis,
+          ),
+          // Classe
+          Text(
+            p.classe,
+            style: TextStyle(fontSize: 11, color: Colors.grey[400]),
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 4),
+          // PV
+          Text(
+            'PV: ${p.pvAtual}/${p.pvMax}',
+            style: const TextStyle(fontSize: 11, color: Colors.amber),
+          ),
         ],
       ),
     );
@@ -124,7 +157,10 @@ class _TelaLutaState extends State<TelaLuta> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(cenario['icon'], color: Colors.white),
-            Text(cenario['nome'], style: const TextStyle(color: Colors.white)),
+            Text(
+              cenario['nome'],
+              style: const TextStyle(color: Colors.white),
+            ),
           ],
         ),
       ),
