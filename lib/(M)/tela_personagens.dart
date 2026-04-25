@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'pagina_luta.dart';
 
 class TelaPersonagens extends StatelessWidget {
   const TelaPersonagens({super.key});
@@ -81,11 +82,20 @@ class TelaPersonagens extends StatelessWidget {
         backgroundColor: Colors.brown[800],
         selectedItemColor: Colors.amber,
         unselectedItemColor: Colors.grey,
+        onTap: (index) {
+          if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const TelaLuta()),
+            );
+          }
+        },
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
             label: 'Personagens',
           ),
+          BottomNavigationBarItem(icon: Icon(Icons.shield), label: 'Luta'),
           BottomNavigationBarItem(icon: Icon(Icons.casino), label: 'Dados'),
         ],
       ),
