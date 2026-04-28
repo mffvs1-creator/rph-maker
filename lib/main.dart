@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rpgmaker/home_page.dart';
 import '(M)/tela_personagens.dart';
 import '(M)/pagina_luta.dart';
 
@@ -15,7 +16,7 @@ class MeuAppRPG extends StatelessWidget {
       title: 'RPH Maker',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: const TelaPersonagens(),
+      home: const HomePage(),
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../rph_maker/personagem_model.dart';
+import 'personagem_model.dart';
 
 class TelaLuta extends StatefulWidget {
-  final List<Personagem> personagens;
+  final List<personagem> personagens;
 
   const TelaLuta({super.key, required this.personagens});
 
@@ -87,7 +87,7 @@ class _TelaLutaState extends State<TelaLuta> {
     );
   }
 
-  Widget _cardPersonagem(Personagem p) {
+  Widget _cardPersonagem(personagem p) {
     return Container(
       width: 110,
       margin: const EdgeInsets.only(right: 10),

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:rpgmaker/(M)/personagem_model.dart';
 void main() => runApp(const PersonagemApp());
 
 // ─── Model ────────────────────────────────────────────────────────────────────
-
-class Personagem {
+class FichasP {
   final String nome;
   final int forca;
   final int agilidade;
@@ -15,7 +14,7 @@ class Personagem {
   final int ca;
   final String imagem;
 
-  const Personagem({
+  const FichasP({
     required this.nome,
     required this.forca,
     required this.agilidade,
@@ -26,7 +25,6 @@ class Personagem {
     required this.ca,
     required this.imagem,
   });
-
   int get modificadorForca => (forca - 10) ~/ 2;
   int get modificadorAgilidade => (agilidade - 10) ~/ 2;
   int get modificadorInteligencia => (inteligencia - 10) ~/ 2;
@@ -82,7 +80,7 @@ class PersonagemApp extends StatelessWidget {
     return MaterialApp(
       title: 'Ficha de Personagem',
       theme: _theme,
-      home: const HomeScreen(),
+      home: const Ficha(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -90,10 +88,10 @@ class PersonagemApp extends StatelessWidget {
 
 // ─── Home ─────────────────────────────────────────────────────────────────────
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class Ficha extends StatelessWidget {
+  const Ficha({super.key});
 
-  static const _example = Personagem(
+  static const _example = FichasP(
     nome: 'Julio',
     forca: 10,
     agilidade: 8,
@@ -104,39 +102,51 @@ class HomeScreen extends StatelessWidget {
     ca: 18,
     imagem: 'https://i.pinimg.com/736x/eb/01/04/eb01044783b72a4140d5fa80ec28f104.jpg',
   );
-  static const _example2 = Personagem(
+  static const _example2 = FichasP(
     nome: 'Elara',
-    forca: 10,
-    agilidade: 8,
-    inteligencia: 6,
+    forca: 6,
+    agilidade: 12,
+    inteligencia: 10,
     classe: 'Arqueira',
     pvAtual: 22,
     pvMax: 22,
     ca: 18,
     imagem: 'https://cdn.rafled.com/anime-icons/images/sN5EGhvu8EvZA35RXmT3tU8jQwOalzqK.jpg',
   );
-  static const _example3 = Personagem(
+  static const _example3 = FichasP(
     nome: 'Lysandra',
-    forca: 10,
-    agilidade: 8,
-    inteligencia: 6,
+    forca: 5,
+    agilidade: 4,
+    inteligencia: 15,
     classe: 'Curandeira',
     pvAtual: 10,
     pvMax: 10,
     ca: 18,
     imagem: 'https://cdn.rafled.com/anime-icons/images/f2avsZPYjzdLGSjT1Jrp63aKhRT8yyCW.jpg',
   );
-static const _example4 = Personagem(
+static const _example4 = FichasP(
     nome: 'Kael',
-    forca: 10,
-    agilidade: 8,
-    inteligencia: 6,
+    forca: 11,
+    agilidade: 13,
+    inteligencia: 12,
     classe: 'Invocador',
     pvAtual: 20,
     pvMax: 20,
     ca: 18,
     imagem: 'https://images.cults3d.com/oB-W8h92wqml1soy2CeP5KL3gQQ=/516x516/filters:no_upscale():format(webp)/https://fbi.cults3d.com/uploaders/15449960/illustration-file/771a0ee5-c7a4-49c5-8b3a-6aea9fd34e31/images-2025-09-21T182621.668.jpg',
   );
+  static const _example5 = FichasP(
+    nome: 'Thor',
+    forca: 10,
+    agilidade: 8,
+    inteligencia: 14,
+    classe: 'xãman',
+    pvAtual: 20,
+    pvMax: 20,
+    ca: 18,
+    imagem: 'https://pbs.twimg.com/profile_images/1052260285111779334/B_ME7cF8_400x400.jpg',
+  );
+
 
 
   @override
@@ -152,16 +162,19 @@ static const _example4 = Personagem(
               const SizedBox(height: 24),
               _SectionLabel('Fichas de Exemplo'),
               const SizedBox(height: 10),
-              PersonagemCard(personagem: _example),
+              PersonagemCard(FichaP: _example),
               const SizedBox(height: 28),
-              PersonagemCard(personagem: _example2),
+              PersonagemCard(FichaP: _example2),
               const SizedBox(height: 28),
-              PersonagemCard(personagem: _example3),
+              PersonagemCard(FichaP: _example3),
               const SizedBox(height: 28),
-              PersonagemCard(personagem: _example4),
+              PersonagemCard(FichaP: _example4),
+              const SizedBox(height: 28),
+              PersonagemCard(FichaP: _example5),
               const SizedBox(height: 28),
               _SectionLabel('Criar Nova Ficha'),
               const SizedBox(height: 10),
+
               _CriarFichaCard(),
             ],
           ),
@@ -248,8 +261,8 @@ class _SectionLabel extends StatelessWidget {
 // ─── Personagem Card ──────────────────────────────────────────────────────────
 
 class PersonagemCard extends StatelessWidget {
-  final Personagem personagem;
-  const PersonagemCard({super.key, required this.personagem});
+  final FichasP FichaP;
+  const PersonagemCard({super.key, required this.FichaP});
 
   @override
   Widget build(BuildContext context) {
@@ -262,16 +275,16 @@ class PersonagemCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          _CardHeader(personagem: personagem),
+          _CardHeader(FichaP: FichaP),
           Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
                 Row(
                   children: [
-                    Expanded(child: _HpBar(personagem: personagem)),
+                    Expanded(child: _HpBar(FichaP: FichaP)),
                     const SizedBox(width: 12),
-                    _CaBox(ca: personagem.ca),
+                    _CaBox(ca: FichaP.ca),
                   ],
                 ),
                 const SizedBox(height: 14),
@@ -280,9 +293,9 @@ class PersonagemCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _StatBox(label: 'FOR', value: personagem.forca, mod: personagem.modificadorForca),
-                    _StatBox(label: 'AGI', value: personagem.agilidade, mod: personagem.modificadorAgilidade),
-                    _StatBox(label: 'INT', value: personagem.inteligencia, mod: personagem.modificadorInteligencia),
+                    _StatBox(label: 'FOR', value: FichaP.forca, mod: FichaP.modificadorForca),
+                    _StatBox(label: 'AGI', value: FichaP.agilidade, mod: FichaP.modificadorAgilidade),
+                    _StatBox(label: 'INT', value: FichaP.inteligencia, mod: FichaP.modificadorInteligencia),
                   ],
                 ),
               ],
@@ -295,8 +308,8 @@ class PersonagemCard extends StatelessWidget {
 }
 
 class _CardHeader extends StatelessWidget {
-  final Personagem personagem;
-  const _CardHeader({required this.personagem});
+  final FichasP FichaP;
+  const _CardHeader({required this.FichaP});
 
   @override
   Widget build(BuildContext context) {
@@ -308,14 +321,14 @@ class _CardHeader extends StatelessWidget {
       ),
       child: Row(
         children: [
-          _Avatar(imagem: personagem.imagem, nome: personagem.nome),
+          _Avatar(imagem: FichaP.imagem, nome: FichaP.nome),
           const SizedBox(width: 14),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  personagem.nome,
+                  FichaP.nome,
                   style: const TextStyle(
                     color: _goldLight,
                     fontSize: 18,
@@ -331,7 +344,7 @@ class _CardHeader extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
-                    personagem.classe.toUpperCase(),
+                    FichaP.classe.toUpperCase(),
                     style: const TextStyle(
                       color: _gold,
                       fontSize: 10,
@@ -382,12 +395,12 @@ class _Avatar extends StatelessWidget {
 }
 
 class _HpBar extends StatelessWidget {
-  final Personagem personagem;
-  const _HpBar({required this.personagem});
+  final FichasP FichaP;
+  const _HpBar({required this.FichaP});
 
   Color get _barColor {
-    if (personagem.hpPercent > 0.6) return const Color(0xFF2E7D32);
-    if (personagem.hpPercent > 0.3) return const Color(0xFFF9A825);
+    if (FichaP.hpPercent > 0.6) return const Color(0xFF2E7D32);
+    if (FichaP.hpPercent > 0.3) return const Color(0xFFF9A825);
     return _crimson;
   }
 
@@ -408,7 +421,7 @@ class _HpBar extends StatelessWidget {
               ],
             ),
             Text(
-              '${personagem.pvAtual} / ${personagem.pvMax}',
+              '${FichaP.pvAtual} / ${FichaP.pvMax}',
               style: const TextStyle(fontSize: 13, color: _inkDark, fontWeight: FontWeight.w700),
             ),
           ],
@@ -417,7 +430,7 @@ class _HpBar extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(4),
           child: LinearProgressIndicator(
-            value: personagem.hpPercent.clamp(0, 1),
+            value: FichaP.hpPercent.clamp(0, 1),
             minHeight: 10,
             backgroundColor: Colors.black12,
             valueColor: AlwaysStoppedAnimation(_barColor),
@@ -533,12 +546,12 @@ class _CriarFichaCardState extends State<_CriarFichaCard> {
   final _ca = TextEditingController(text: '10');
   final _imagem = TextEditingController();
 
-  Personagem? _preview;
+  FichasP? _preview;
 
   void _submit() {
     if (_formKey.currentState!.validate()) {
       setState(() {
-        _preview = Personagem(
+        _preview = FichasP(
           nome: _nome.text.trim(),
           classe: _classe.text.trim(),
           forca: int.parse(_forca.text),
@@ -644,7 +657,7 @@ class _CriarFichaCardState extends State<_CriarFichaCard> {
                   const SizedBox(height: 14),
                   _SectionLabel('Pré-visualização'),
                   const SizedBox(height: 10),
-                  PersonagemCard(personagem: _preview!),
+                  PersonagemCard(FichaP: _preview!),
                 ],
               ),
             ),

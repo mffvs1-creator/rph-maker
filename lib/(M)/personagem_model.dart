@@ -1,4 +1,4 @@
-class Personagem {
+class personagem {
   final String nome;
   final int forca;
   final int agilidade;
@@ -9,7 +9,7 @@ class Personagem {
   final int ca;
   final String imagem;
 
-  Personagem({
+  personagem ({
     required this.nome,
     required this.forca,
     required this.agilidade,

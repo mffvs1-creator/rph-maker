@@ -1,19 +1,22 @@
+
 import 'package:flutter/material.dart';
-import 'personagem_model.dart';
 
+import '(J)/dados.dart';
+import '(M)/pagina_luta.dart';
+import '(M)/personagem_model.dart';
+import '(M)/tela_personagens.dart';
+import '(J)/fichas.dart';
 
-class TelaPersonagens extends StatefulWidget {
-  const TelaPersonagens({super.key});
-
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<TelaPersonagens> createState() => _TelaPersonagensState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _TelaPersonagensState extends State<TelaPersonagens> {
-
+class _HomePageState extends State<HomePage> {
   // Lista centralizada de personagens
-  static final List<personagem> personagens = [
+  final List<personagem> personagens = [
     personagem(
       nome: 'Julio',
       classe: 'Guerreiro',
@@ -71,48 +74,41 @@ class _TelaPersonagensState extends State<TelaPersonagens> {
     ),
   ];
 
-  Widget buildCircleAvatar(String imagem) {
-    return CircleAvatar(
-      radius: 30,
-      backgroundColor: Colors.amber[700],
-      backgroundImage: NetworkImage(imagem),
-    );
-  }
+  int selectedIndex = 0;
+
+  late List pages = [
+    TelaPersonagens(),
+    TelaLuta(personagens: personagens),
+    DiceRollerHome(),
+    Ficha(),
+  ];
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Personagens'),
+      body: pages[selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        onTap: (index) {
+          setState(() {
+            selectedIndex = index;
+          });
+        },
         backgroundColor: Colors.brown[800],
-      ),
-      body: buildBody()
-    );
-  }
+        selectedItemColor: Colors.amber,
+        unselectedItemColor: Colors.grey,
 
-  Widget buildBody(){
-    return ListView.builder(
-      itemCount: personagens.length,
-      itemBuilder: (context, index) {
-        final p = personagens[index];
-        return Card(
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          color: Colors.grey[850],
-          child: ListTile(
-            leading: buildCircleAvatar(p.imagem),
-            title: Text(
-              p.nome,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text(p.classe),
-            trailing: Text(
-              'PV: ${p.pvAtual}/${p.pvMax}\nCA: ${p.ca}',
-              style: const TextStyle(fontSize: 14, color: Colors.amber),
-              textAlign: TextAlign.right,
-            ),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people),
+            label: 'Personagens',
           ),
-        );
-      },
+          BottomNavigationBarItem(icon: Icon(Icons.shield), label: 'Luta'),
+          BottomNavigationBarItem(icon: Icon(Icons.casino), label: 'Dados'),
+          BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: 'Fichas')
+        ],
+      ),
     );
   }
 }
