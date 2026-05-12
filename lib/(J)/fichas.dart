@@ -35,9 +35,9 @@ class FichasP {
 
 const _parchment = Color(0xFF12100E);
 const _inkDark = Color(0xFF1C1007);
-const _inkMid = Color(0xFF3D2B0F);
-const _gold = Color(0xFFB8860B);
-const _goldLight = Color(0xFFD4A017);
+const _inkMid = Color(0xFF34445D);
+const _gold = Color(0xFF2E5B8B);
+const _goldLight = Color(0xFF5A788F);
 const _crimson = Color(0xFF8B0000);
 const _cardBg = Color(0xFFFAF3E0);
 const _shadow = Color(0x33000000);
@@ -494,7 +494,7 @@ class _StatBox extends StatelessWidget {
               style: const TextStyle(color: _gold, fontSize: 10, letterSpacing: 2, fontWeight: FontWeight.w700)),
           const SizedBox(height: 4),
           Text('$value',
-              style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w900, height: 1)),
+              style: const TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.w900, height: 1)),
           const SizedBox(height: 2),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),

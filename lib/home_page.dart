@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
           });
         },
         backgroundColor: Colors.brown[800],
-        selectedItemColor: Colors.amber,
+        selectedItemColor: Color(0xFF2E5B8B),
         unselectedItemColor: Colors.grey,
 
         items: const [

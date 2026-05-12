@@ -48,7 +48,7 @@ class DiceRollerApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFFD4A843),
+          seedColor: const Color(0xFF2E5B8B),
           brightness: Brightness.dark,
         ),
         useMaterial3: true,
@@ -195,10 +195,10 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
           const Text(
             'DADOS',
             style: TextStyle(
-              fontSize: 28,
+              fontSize: 26,
               fontWeight: FontWeight.w900,
-              letterSpacing: 8,
-              color: Color(0xFFD4A843),
+              letterSpacing: 7,
+              color: Color(0xFF2E5B8B),
             ),
           ),
           const SizedBox(width: 8),
@@ -207,17 +207,17 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
             height: 6,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: Color(0xFFD4A843),
+              color: Color(0xFF2E5B8B),
             ),
           ),
           const SizedBox(width: 8),
           const Text(
             'RPG',
             style: TextStyle(
-              fontSize: 28,
+              fontSize: 26,
               fontWeight: FontWeight.w200,
-              letterSpacing: 8,
-              color: Color(0xFF888070),
+              letterSpacing: 7,
+              color: Color(0xFF5A788F),
             ),
           ),
           const Spacer(),
@@ -227,7 +227,7 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
               child: const Text(
                 'limpar histórico',
                 style: TextStyle(
-                  color: Color(0xFF555048),
+                  color: Color(0xFF5A788F),
                   fontSize: 13,
                   letterSpacing: 1,
                 ),
@@ -261,12 +261,12 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
               decoration: BoxDecoration(
                 color: selected
-                    ? const Color(0xFFD4A843)
+                    ? const Color(0xFF2E5B8B)
                     : const Color(0xFF1E1C18),
                 borderRadius: BorderRadius.circular(6),
                 border: Border.all(
                   color: selected
-                      ? const Color(0xFFD4A843)
+                      ? const Color(0xFF2E5B8B)
                       : const Color(0xFF2E2C28),
                   width: 1.5,
                 ),
@@ -279,7 +279,7 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
                   letterSpacing: 1,
                   color: selected
                       ? const Color(0xFF12100E)
-                      : const Color(0xFF7A7060),
+                      : const Color(0xFF5A788F),
                 ),
               ),
             ),
@@ -303,7 +303,7 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
           );
         },
         child: Container(
-          height: 160,
+          height: 170,
           decoration: BoxDecoration(
             color: const Color(0xFF1A1814),
             borderRadius: BorderRadius.circular(16),
@@ -376,7 +376,7 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
                       style: TextStyle(
                         fontSize: 11,
                         letterSpacing: 3,
-                        color: Color(0xFF666050),
+                        color: Color(0xFF5A788F),
                       ),
                     ),
                   ),
@@ -385,7 +385,7 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
                   style: const TextStyle(
                     fontSize: 64,
                     fontWeight: FontWeight.w900,
-                    color: Color(0xFFD4A843),
+                    color: Color(0xFF2E5B8B),
                     height: 1,
                   ),
                 ),
@@ -397,7 +397,7 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
               style: const TextStyle(
                 fontSize: 12,
                 letterSpacing: 3,
-                color: Color(0xFF555048),
+                color: Color(0xFF5A788F),
               ),
             ),
           ],
@@ -419,7 +419,7 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
         style: const TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.bold,
-          color: Color(0xFFB89535),
+          color: Color(0xFF2E5B8B),
         ),
       ),
     );
@@ -437,7 +437,7 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
             style: TextStyle(
               fontSize: 13,
               letterSpacing: 2,
-              color: Color(0xFF666050),
+              color: Color(0xFF5A788F),
             ),
           ),
           const Spacer(),
@@ -456,7 +456,7 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
               style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w700,
-                color: Color(0xFFD4A843),
+                color: Color(0xFF2E5B8B),
               ),
             ),
           ),
@@ -483,11 +483,11 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
           width: double.infinity,
           height: 56,
           decoration: BoxDecoration(
-            color: const Color(0xFFD4A843),
+            color: const Color(0xFF2E5B8B),
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFFD4A843).withOpacity(0.3),
+                color: const Color(0xFF2E5B8B).withOpacity(0.3),
                 blurRadius: 20,
                 offset: const Offset(0, 8),
               ),
@@ -533,7 +533,7 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
                   style: TextStyle(
                     fontSize: 11,
                     letterSpacing: 4,
-                    color: Color(0xFF555048),
+                    color: Color(0xFF5A788F),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -549,7 +549,7 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
                       '${_history.length}',
                       style: const TextStyle(
                         fontSize: 10,
-                        color: Color(0xFF666050),
+                        color: Color(0xFF5A788F),
                         letterSpacing: 0,
                       ),
                     ),
@@ -563,7 +563,7 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
                     child: Text(
                       'Nenhum lançamento ainda',
                       style: TextStyle(
-                        color: Color(0xFF333028),
+                        color: Color(0xFF5A788F),
                         fontSize: 13,
                         letterSpacing: 2,
                       ),
@@ -616,7 +616,7 @@ class _CountButton extends StatelessWidget {
         child: Icon(
           icon,
           size: 18,
-          color: enabled ? const Color(0xFFD4A843) : const Color(0xFF333028),
+          color: enabled ? const Color(0xFF2E5B8B) : const Color(0xFF333028),
         ),
       ),
     );
@@ -643,7 +643,7 @@ class _HistoryTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: isFirst
-                ? const Color(0xFF3A3020)
+                ? const Color(0xFF34445D)
                 : const Color(0xFF1E1C18),
             width: 1,
           ),
@@ -669,8 +669,8 @@ class _HistoryTile extends StatelessWidget {
                       fontSize: 18,
                       fontWeight: FontWeight.w900,
                       color: isFirst
-                          ? const Color(0xFFD4A843)
-                          : const Color(0xFF7A6830),
+                          ? const Color(0xFF2E5B8B)
+                          : const Color(0xFF34445D),
                       height: 1,
                     ),
                   ),
@@ -679,7 +679,7 @@ class _HistoryTile extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 9,
                       letterSpacing: 1,
-                      color: Color(0xFF4A4030),
+                      color: Color(0xFF34445D),
                     ),
                   ),
                 ],
@@ -696,7 +696,7 @@ class _HistoryTile extends StatelessWidget {
                       roll.values.join('  ·  '),
                       style: const TextStyle(
                         fontSize: 13,
-                        color: Color(0xFF6A6050),
+                        color: Color(0xFF5A788F),
                         letterSpacing: 1,
                       ),
                       overflow: TextOverflow.ellipsis,
