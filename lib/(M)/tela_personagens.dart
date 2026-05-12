@@ -74,7 +74,7 @@ class _TelaPersonagensState extends State<TelaPersonagens> {
   Widget buildCircleAvatar(String imagem) {
     return CircleAvatar(
       radius: 30,
-      backgroundColor: Colors.amber[700],
+      backgroundColor: Color(0xFF2E5B8B),
       backgroundImage: NetworkImage(imagem),
     );
   }
@@ -84,7 +84,7 @@ class _TelaPersonagensState extends State<TelaPersonagens> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Personagens'),
-        backgroundColor: Colors.brown[800],
+        backgroundColor: Color(0xFF2E5B8B),
       ),
       body: buildBody()
     );
@@ -97,7 +97,7 @@ class _TelaPersonagensState extends State<TelaPersonagens> {
         final p = personagens[index];
         return Card(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          color: Colors.grey[850],
+          color: Color(0xFF2E5B8B),
           child: ListTile(
             leading: buildCircleAvatar(p.imagem),
             title: Text(
@@ -107,11 +107,11 @@ class _TelaPersonagensState extends State<TelaPersonagens> {
             subtitle: Text(p.classe),
             trailing: Text(
               'PV: ${p.pvAtual}/${p.pvMax}\nCA: ${p.ca}',
-              style: const TextStyle(fontSize: 14, color: Colors.amber),
               textAlign: TextAlign.right,
+              style: const TextStyle(fontSize: 14, color: Color(0xFF2E5B8B)),
             ),
-          ),
-        );
+            ),
+          );
       },
     );
   }

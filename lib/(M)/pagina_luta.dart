@@ -93,7 +93,7 @@ class _TelaLutaState extends State<TelaLuta> {
       margin: const EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.amber),
+        border: Border.all(color: Color(0xFF2E5B8B)),
         color: Colors.grey[850],
       ),
       child: Column(
@@ -102,7 +102,7 @@ class _TelaLutaState extends State<TelaLuta> {
           // Imagem do personagem
           CircleAvatar(
             radius: 28,
-            backgroundColor: Colors.amber[700],
+            backgroundColor: Color(0xFF2E5B8B),
             backgroundImage: p.imagem.isNotEmpty
                 ? NetworkImage(p.imagem)
                 : null,
@@ -116,7 +116,7 @@ class _TelaLutaState extends State<TelaLuta> {
             p.nome,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: Color(0xFF2E5B8B),
               fontSize: 13,
             ),
             overflow: TextOverflow.ellipsis,
@@ -131,7 +131,7 @@ class _TelaLutaState extends State<TelaLuta> {
           // PV
           Text(
             'PV: ${p.pvAtual}/${p.pvMax}',
-            style: const TextStyle(fontSize: 11, color: Colors.amber),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF2E5B8B)),
           ),
         ],
       ),
@@ -149,17 +149,17 @@ class _TelaLutaState extends State<TelaLuta> {
           color: cenario['cor'],
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: selecionado ? Colors.amber : Colors.transparent,
+            color: selecionado ? Color(0xFF2E5B8B) : Colors.transparent,
             width: 2,
           ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(cenario['icon'], color: Colors.white),
+            Icon(cenario['icon'], color: Color(0xFF2E5B8B)),
             Text(
               cenario['nome'],
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Color(0xFF2E5B8B)),
             ),
           ],
         ),
