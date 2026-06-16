@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rpgmaker/home_page.dart';
-import 'Personagens/tela_personagens.dart';
-import 'Personagens/pagina_luta.dart';
+import 'persona5/tela_personagens.dart';
+import 'persona5/pagina_luta.dart';
 
 void main() {
   runApp(const MeuAppRPG());
