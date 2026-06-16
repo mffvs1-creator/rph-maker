@@ -1,11 +1,11 @@
 
 import 'package:flutter/material.dart';
 
-import '(J)/dados.dart';
-import '(M)/pagina_luta.dart';
-import '(M)/personagem_model.dart';
-import '(M)/tela_personagens.dart';
-import '(J)/fichas.dart';
+import 'Utilidades/dados.dart';
+import 'Personagens/pagina_luta.dart';
+import 'Personagens/personagem_model.dart';
+import 'Personagens/tela_personagens.dart';
+import 'Personagens/fichas.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

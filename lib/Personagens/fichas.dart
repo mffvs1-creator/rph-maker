@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rpgmaker/(M)/personagem_model.dart';
+import 'package:rpgmaker/Personagens/personagem_model.dart';
 void main() => runApp(const PersonagemApp());
 
 // ─── Model ────────────────────────────────────────────────────────────────────
