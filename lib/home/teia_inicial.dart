@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rpgmaker/home/db_helper.dart';
+import 'package:rpgmaker/home/opcoes.dart';
+
+import 'home_dao.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,8 +27,11 @@ class MyApp extends StatelessWidget {
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+
+
   @override
   Widget build(BuildContext context) {
+    DBHelper().initDB();
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
@@ -67,9 +74,17 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+
 // TELA 2 - MENU
-class MenuScreen extends StatelessWidget {
+class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
+
+  @override
+  State<MenuScreen> createState() => _MenuScreenState();
+}
+
+class _MenuScreenState extends State<MenuScreen> {
+  List<Opcoes> lista= [];
 
   Widget buildButton(BuildContext context, String text) {
     return Padding(
@@ -93,6 +108,17 @@ class MenuScreen extends StatelessWidget {
     );
   }
 
+  loadData() async {
+    lista = await OpcoesDao().listOpcoes();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    loadData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,11 +140,18 @@ class MenuScreen extends StatelessWidget {
               buildButton(context, "Créditos"), // 👈 CONECTADO
             ],
           ),
+
+          ListView.builder(
+            itemCount: lista.length,
+              itemBuilder: (context, i) {
+              buildButton(context, lista[i].Name);
+          })
         ],
       ),
     );
   }
 }
+
 
 // TELA DE CRÉDITOS
 class CreditsScreen extends StatelessWidget {

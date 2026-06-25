@@ -1,21 +1,21 @@
+import 'package:rpgmaker/home/opcoes.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'db_helper.dart';
 
-class RpgDao {
-
-  listRPG () async {
+class OpcoesDao {
+  Future<List<Opcoes>> listOpcoes () async {
     Database db = await DBHelper().initDB();
-    String sql = 'SELECT * FROM RPG';
-
+    String sql = 'SELECT * FROM OPCOES;';
     var result = await db.rawQuery(sql);
-    // [ {id: 1, name: 'joao', end: asdas},  {id: 2, name: 'maria', end: 'endreco'} ]
+    List<Opcoes> lista = [];
 
     for(var json in result){
-      // json = {id: 1, name: 'joao', end: asdas}
-
+      // json = {id: 1, name: 'fi8cvha'}
+      Opcoes o = Opcoes.fromJson(json);
+      lista.add(o);
     }
+    return lista;
 
   }
-
 }

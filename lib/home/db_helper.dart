@@ -17,17 +17,22 @@ class DBHelper {
 
   FutureOr<void> onCreate(Database db, int version) {
     String sql = '''
-        CREATE TABLE RPG (
+        CREATE TABLE OPCOES (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
-          NAME TEXT,
-          END TEXT,
+          NAME TEXT
           
         );            
     ''';
 
     db.execute(sql);
 
-    sql = "INSERT INTO RPG (NAME, END) VALUES ('JOSE', 'AV DAKJDALS');";
+    sql = '''INSERT INTO OPCOES (NAME) VALUES
+        ('Mapas'),
+        ('Fichas'),
+        ('Dados'),
+        ('Personagens'),
+        ('Creditos');
+    ''';
     db.execute(sql);
 
 
