@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:rpgmaker/persona5/db_helperpersonagens.dart';
 
 import 'utilidades/dados.dart';
 import 'persona5/pagina_luta.dart';
@@ -15,6 +16,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    DBHelperpersonagens().initDB(); // Inicializa o banco de dados ao iniciar o aplicativo
+  }
   // Lista centralizada de personagens
   final List<personagem> personagens = [
     personagem(
