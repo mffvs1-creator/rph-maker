@@ -5,7 +5,7 @@ class DBHelperpersonagens {
   Future<Database> initDB() async {
     String path = await getDatabasesPath();
     String dbName = 'rphmaker.db';
-
+    
     String dbPath = path + dbName;
 
     Database db = await openDatabase(dbPath, version: 1, onCreate: onCreateDB);
