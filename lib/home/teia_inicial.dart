@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rpgmaker/home/db_helper.dart';
 import 'package:rpgmaker/home/opcoes.dart';
+import '../utilidades/rodddd.dart';
 
 import 'home_dao.dart';
 
@@ -100,6 +101,13 @@ class _MenuScreenState extends State<MenuScreen> {
                   builder: (context) => const CreditsScreen(),
                 ),
               );
+            } else if (text == "Mapas") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Mapa(),
+                ),
+              );
             }
           },
           child: Text(text),
@@ -130,22 +138,26 @@ class _MenuScreenState extends State<MenuScreen> {
             fit: BoxFit.cover,
           ),
 
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              buildButton(context, "Mapas"),
-              buildButton(context, "Fichas"),
-              buildButton(context, "Dados"),
-              buildButton(context, "Personagens"),
-              buildButton(context, "Créditos"), // 👈 CONECTADO
-            ],
-          ),
-
-          ListView.builder(
-            itemCount: lista.length,
-              itemBuilder: (context, i) {
-              buildButton(context, lista[i].Name);
-          })
+          // Centralizamos os botões perfeitamente
+          Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 20),
+                  buildButton(context, "Mapas"),
+                  buildButton(context, "Fichas"),
+                  buildButton(context, "Dados"),
+                  buildButton(context, "Personagens"),
+                  buildButton(context, "Créditos"),
+                  
+                  // Se o banco carregar algo extra, mostra aqui embaixo
+                  ...lista.map((opcao) => buildButton(context, opcao.Name)).toList(),
+                  const SizedBox(height: 20),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );
