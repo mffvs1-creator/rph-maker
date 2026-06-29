@@ -138,7 +138,6 @@ class _MenuScreenState extends State<MenuScreen> {
             fit: BoxFit.cover,
           ),
 
-          // Centralizamos os botões perfeitamente
           Center(
             child: SingleChildScrollView(
               child: Column(
