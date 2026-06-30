@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rpgmaker/persona5/personagem_model.dart';
-void main() => runApp(const PersonagemApp());
 
 
 class FichasP {
