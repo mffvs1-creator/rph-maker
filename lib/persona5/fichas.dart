@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rpgmaker/persona5/personagem_model.dart';
 void main() => runApp(const PersonagemApp());
 
-// ─── Model ────────────────────────────────────────────────────────────────────
+
 class FichasP {
   final String nome;
   final int forca;
@@ -31,7 +31,7 @@ class FichasP {
   double get hpPercent => pvMax == 0 ? 0 : pvAtual / pvMax;
 }
 
-// ─── Theme ────────────────────────────────────────────────────────────────────
+
 
 const _parchment = Color(0xFF12100E);
 const _inkDark = Color(0xFF1C1007);
@@ -70,9 +70,10 @@ ThemeData get _theme => ThemeData(
       ),
     );
 
-// ─── App ─────────────────────────────────────────────────────────────────────
+
 
 class PersonagemApp extends StatelessWidget {
+
   const PersonagemApp({super.key});
 
   @override
@@ -86,7 +87,7 @@ class PersonagemApp extends StatelessWidget {
   }
 }
 
-// ─── Home ─────────────────────────────────────────────────────────────────────
+
 
 class Ficha extends StatelessWidget {
   const Ficha({super.key});
@@ -258,7 +259,7 @@ class _SectionLabel extends StatelessWidget {
   }
 }
 
-// ─── Personagem Card ──────────────────────────────────────────────────────────
+
 
 class PersonagemCard extends StatelessWidget {
   final FichasP FichaP;
@@ -527,8 +528,6 @@ class _Divider extends StatelessWidget {
   }
 }
 
-// ─── Criar Ficha Card ─────────────────────────────────────────────────────────
-
 class _CriarFichaCard extends StatefulWidget {
   @override
   State<_CriarFichaCard> createState() => _CriarFichaCardState();
@@ -625,14 +624,14 @@ class _CriarFichaCardState extends State<_CriarFichaCard> {
                     _StatField(label: 'CA', controller: _ca),
                   ]),
                   const SizedBox(height: 12),
-                  _FieldLabel(label: 'URL da Imagem (opcional)', controller: _imagem, hint: 'https://...'),
+                  _FieldLabel(label: 'URL da Imagem', controller: _imagem, hint: 'https://...'),
                   const SizedBox(height: 16),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton.icon(
                       onPressed: _submit,
                       icon: const Icon(Icons.auto_fix_high, size: 16),
-                      label: const Text('GERAR FICHA', style: TextStyle(letterSpacing: 2, fontWeight: FontWeight.w800)),
+                      label: const Text('Salvar ficha', style: TextStyle(letterSpacing: 2, fontWeight: FontWeight.w800)),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: _inkDark,
                         foregroundColor: _goldLight,

@@ -6,10 +6,7 @@ void main() {
   runApp(const DiceRollerApp());
 }
  
-// ─────────────────────────────────────────────
-// Models
-// ─────────────────────────────────────────────
- 
+
 class RollResult {
   final List<int> values;
   final int sides;
@@ -34,10 +31,7 @@ class RollResult {
   }
 }
  
-// ─────────────────────────────────────────────
-// App
-// ─────────────────────────────────────────────
- 
+
 class DiceRollerApp extends StatelessWidget {
   const DiceRollerApp({super.key});
  
@@ -59,10 +53,7 @@ class DiceRollerApp extends StatelessWidget {
   }
 }
  
-// ─────────────────────────────────────────────
-// Home Screen
-// ─────────────────────────────────────────────
- 
+
 class DiceRollerHome extends StatefulWidget {
   const DiceRollerHome({super.key});
  
@@ -79,17 +70,15 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
   int _diceCount = 1;
   RollResult? _lastRoll;
  
-  // Shake / bounce animation for dice
+ 
   late AnimationController _shakeController;
   late Animation<double> _shakeAnimation;
  
-  // Fade-in for result
   late AnimationController _resultFadeController;
   late Animation<double> _resultFade;
  
   static const List<int> _diceSides = [4, 6, 8, 10, 12, 20,];
  
-  // Face symbols per die type (used decoratively)
   static const Map<int, String> _diceEmoji = {
     4: '▲',
     6: '⬛',
@@ -185,8 +174,6 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
     );
   }
  
-  // ── Header ───────────────────────────────────
- 
   Widget _buildHeader() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 20, 24, 4),
@@ -238,7 +225,6 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
     );
   }
  
-  // ── Die-type Selector ─────────────────────────
  
   Widget _buildDiceSelector(ColorScheme colors) {
     return SizedBox(
@@ -288,8 +274,6 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
       ),
     );
   }
- 
-  // ── Roll Area (big result display) ─────────────
  
   Widget _buildRollArea(ColorScheme colors) {
     return Padding(
@@ -363,7 +347,7 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
                     .toList(),
               ),
             if (roll.count > 1) const SizedBox(height: 10),
-            // Total
+  
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -425,8 +409,6 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
     );
   }
  
-  // ── Dice Count Selector ───────────────────────
- 
   Widget _buildCountSelector(ColorScheme colors) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
@@ -472,8 +454,6 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
     );
   }
  
-  // ── Roll Button ───────────────────────────────
- 
   Widget _buildRollButton(ColorScheme colors) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
@@ -516,8 +496,6 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
       ),
     );
   }
- 
-  // ── History Section ───────────────────────────
  
   Widget _buildHistorySection(ColorScheme colors) {
     return Expanded(
@@ -581,10 +559,6 @@ class _DiceRollerHomeState extends State<DiceRollerHome>
     );
   }
 }
- 
-// ─────────────────────────────────────────────
-// Widgets
-// ─────────────────────────────────────────────
  
 class _CountButton extends StatelessWidget {
   final IconData icon;
@@ -650,7 +624,7 @@ class _HistoryTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // Badge
+          
             Container(
               width: 42,
               height: 42,
@@ -686,7 +660,7 @@ class _HistoryTile extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 14),
-            // Values
+           
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -716,7 +690,7 @@ class _HistoryTile extends StatelessWidget {
                 ],
               ),
             ),
-            // Time
+            
             Text(
               roll.timeLabel,
               style: const TextStyle(
