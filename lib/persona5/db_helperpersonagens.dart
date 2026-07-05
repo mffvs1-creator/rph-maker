@@ -31,7 +31,7 @@ class DBHelperpersonagens {
 
     sql = "INSERT INTO PERSONAGEM (nome, classe, pvAtual, pvMax, forca, agilidade, inteligencia, ca, imagem) VALUES ('Julio','Guerreiro',35,35,10,8,6,18,'https://i.pinimg.com/736x/eb/01/04/eb01044783b72a4140d5fa80ec28f104.jpg');";
     await db.execute(sql);
-
+    
     sql = "INSERT INTO PERSONAGEM (nome, classe, pvAtual, pvMax, forca, agilidade, inteligencia, ca, imagem) VALUES ('Elara','Arqueira',22,22,10,8,6,18,'https://cdn.rafled.com/anime-icons/images/sN5EGhvu8EvZA35RXmT3tU8jQwOalzqK.jpg');";
     await db.execute(sql);
 

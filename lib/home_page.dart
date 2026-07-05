@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:rpgmaker/persona5/db_helperpersonagens.dart';
-
 import 'utilidades/dados.dart';
 import 'persona5/pagina_luta.dart';
 import 'persona5/personagem_model.dart';
