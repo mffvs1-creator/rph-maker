@@ -35,6 +35,15 @@ class DBHelper {
     ''';
     db.execute(sql);
 
+    sql = '''
+    CREATE TABLE USER (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    NAME TEXT,
+    PASSWORD TEXT );
+   ''';
+    db.execute(sql);
+
+
 
   }
 }
