@@ -39,5 +39,16 @@ class DBHelperFicha {
 
     sql = "INSERT INTO PERSONAGEM (nome, classe, pvAtual, pvMax, forca, agilidade, inteligencia, ca, imagem) VALUES ('Lysandra','Curandeira',10,10,10,8,6,18,'https://cdn.rafled.com/anime-icons/images/f2avsZPYjzdLGSjT1Jrp63aKhRT8yyCW.jpg');";
     await db.execute(sql);
+
+    sql = '''CREATE TABLE USER (
+    username text primary key,
+   password TEXT
+    );''';
+
+    await db.execute(sql);
+
+    sql = "INSERT INTO USER (username, password) VALUES ('Hangolanu', '40028922');";
+    await db.execute(sql);
+
   }
 }
