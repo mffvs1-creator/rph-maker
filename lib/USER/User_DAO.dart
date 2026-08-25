@@ -6,7 +6,7 @@ class UserDao {
 Future<bool> login(String username, String password) async {
   Database db = await DBHelper().initDB();
   String sql = '''
-  SELECT *
+  SELECT *  
   FROM user
   WHERE username = ? AND password = ?;
   ''';
