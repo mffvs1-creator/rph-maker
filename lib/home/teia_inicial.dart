@@ -32,7 +32,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DBHelper().initDB();
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
@@ -151,7 +150,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   buildButton(context, "Créditos"),
                   
                   // Se o banco carregar algo extra, mostra aqui embaixo
-                  ...lista.map((opcao) => buildButton(context, opcao.Name)).toList(),
+                  //...lista.map((opcao) => buildButton(context, opcao.Name)).toList(),
                   const SizedBox(height: 20),
                 ],
               ),
