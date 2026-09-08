@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:rpgmaker/home/register_page.dart';
 import 'package:rpgmaker/home/teia_inicial.dart';
 import 'package:rpgmaker/USER/User_DAO.dart';
 import 'package:rpgmaker/home/shared_preds.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -26,76 +28,86 @@ class _LoginPageState extends State<LoginPage> {
         body: Stack(
           fit: StackFit.expand,
           children: [
-          Image.asset(
-          'assets/images/telalogin.png',
-          fit: BoxFit.cover,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(32),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  'Entre ou cadastre-se no RPG Maker',
-                  style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 24),
-                TextField(
-                  controller: userController,
-                  decoration: InputDecoration(
-                    hintText: 'Usuário',
-                    // focusedBorder: buildUserOutlineInputBorder(),
-                    // border: buildUserOutlineInputBorder(),
+            Image.asset('assets/images/telalogin.png', fit: BoxFit.cover),
+            Padding(
+              padding: const EdgeInsets.all(32),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    'Entre ou cadastre-se no RPG Maker',
+                    style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
                   ),
-                ),
-                TextField(
-                  controller: passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    hintText: 'Senha',
-                    // focusedBorder: buildPasswordOutlineInputBorder(),
-                    // border: buildPasswordOutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: 24),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF102A5E),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8), // <-- Radius
+                  SizedBox(height: 24),
+                  TextField(
+                    controller: userController,
+                    decoration: InputDecoration(
+                      hintText: 'Usuário',
+                      // focusedBorder: buildUserOutlineInputBorder(),
+                      // border: buildUserOutlineInputBorder(),
                     ),
                   ),
-                  onPressed: onPressed,
-                  child: Text(
-                    'Entrar',
-                    style: TextStyle(color: Colors.indigoAccent, fontWeight: FontWeight.w600, fontSize: 16),
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8), // <-- Radius
+                  TextField(
+                    controller: passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      hintText: 'Senha',
+                      // focusedBorder: buildPasswordOutlineInputBorder(),
+                      // border: buildPasswordOutlineInputBorder(),
                     ),
                   ),
-                  onPressed: () {},
-                  child: Text(
-                    'Cadastrar Usuário',
-                    style: TextStyle(
-                      color: Color(0xFF323C81),
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
+                  SizedBox(height: 24),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF102A5E),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8), // <-- Radius
+                      ),
+                    ),
+                    onPressed: onPressed,
+                    child: Text(
+                      'Entrar',
+                      style: TextStyle(
+                        color: Colors.indigoAccent,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
-        ]
-      ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8), // <-- Radius
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return RegisterPage();
+                          },
+                        ),
+                      );
+                    },
 
-    )
+                    child: Text(
+                      'Cadastrar Usuário',
+                      style: TextStyle(
+                        color: Color(0xFF000000),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
