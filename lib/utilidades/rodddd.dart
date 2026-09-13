@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'MAPA MUNDIAL.dart' as gm;
 import 'buncomap.dart';
-import 'api_missoes.dart';
+import '../api/api_missoes.dart';
 import 'missao_model.dart';
 
 class Mapa extends StatefulWidget {

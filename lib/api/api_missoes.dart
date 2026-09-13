@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'missao_model.dart';
+import '../utilidades/missao_model.dart';
 
 class ApiMissoes {
   final String url = 'https://6aa6b4dfd7765db985078a40.mockapi.io/missoes';
