@@ -5,17 +5,20 @@ import 'package:sqflite/sqflite.dart';
 
 class DBHelperFicha {
   Future<Database> initDB() async {
-  String path = await getDatabasesPath();
-  String dbName = 'ficha.db';
+    String path = await getDatabasesPath();
+    String dbName = 'ficha.db';
 
-  String dbPath = join(path, dbName);
+    String dbPath = join(path, dbName);
 
-  Database db = await openDatabase(dbPath, version: 1, onCreate: onCreateDB);
+    Database db = await openDatabase(dbPath, version: 1, onCreate: onCreateDB);
 
-  return db;
+    return db;
   }
 
   Future<void> onCreateDB(Database db, int version) async {
+    // Table for fichas the user creates in the app. The example fichas
+    // shown on the home screen come from FichaApiFake, not this table —
+    // this only stores fichas the player actually saves.
     String sql = '''CREATE TABLE FICHA (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       nome TEXT,
@@ -31,24 +34,14 @@ class DBHelperFicha {
 
     await db.execute(sql);
 
-    sql = "INSERT INTO PERSONAGEM (nome, classe, pvAtual, pvMax, forca, agilidade, inteligencia, ca, imagem) VALUES ('Julio','Guerreiro',35,35,10,8,6,18,'https://i.pinimg.com/736x/eb/01/04/eb01044783b72a4140d5fa80ec28f104.jpg');";
-    await db.execute(sql);
-
-    sql = "INSERT INTO PERSONAGEM (nome, classe, pvAtual, pvMax, forca, agilidade, inteligencia, ca, imagem) VALUES ('Elara','Arqueira',22,22,10,8,6,18,'https://cdn.rafled.com/anime-icons/images/sN5EGhvu8EvZA35RXmT3tU8jQwOalzqK.jpg');";
-    await db.execute(sql);
-
-    sql = "INSERT INTO PERSONAGEM (nome, classe, pvAtual, pvMax, forca, agilidade, inteligencia, ca, imagem) VALUES ('Lysandra','Curandeira',10,10,10,8,6,18,'https://cdn.rafled.com/anime-icons/images/f2avsZPYjzdLGSjT1Jrp63aKhRT8yyCW.jpg');";
-    await db.execute(sql);
-
     sql = '''CREATE TABLE USER (
-    username text primary key,
-   password TEXT
+      username TEXT PRIMARY KEY,
+      password TEXT
     );''';
 
     await db.execute(sql);
 
     sql = "INSERT INTO USER (username, password) VALUES ('Hangolanu', '40028922');";
     await db.execute(sql);
-
   }
 }

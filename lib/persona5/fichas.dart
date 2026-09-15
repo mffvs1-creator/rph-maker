@@ -1,34 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:rpgmaker/persona5/personagem_model.dart';
-
-
-class FichasP {
-  final String nome;
-  final int forca;
-  final int agilidade;
-  final int inteligencia;
-  final String classe;
-  final int pvAtual;
-  final int pvMax;
-  final int ca;
-  final String imagem;
-
-  const FichasP({
-    required this.nome,
-    required this.forca,
-    required this.agilidade,
-    required this.inteligencia,
-    required this.classe,
-    required this.pvAtual,
-    required this.pvMax,
-    required this.ca,
-    required this.imagem,
-  });
-  int get modificadorForca => (forca - 10) ~/ 2;
-  int get modificadorAgilidade => (agilidade - 10) ~/ 2;
-  int get modificadorInteligencia => (inteligencia - 10) ~/ 2;
-  double get hpPercent => pvMax == 0 ? 0 : pvAtual / pvMax;
-}
+import 'package:rpgmaker/db_ficha/fichadao.dart';
+import 'package:rpgmaker/api/apifake/items.dart';
+import 'package:rpgmaker/api/apifake/fichaapi.dart';
+import 'package:rpgmaker/api/itemsapi.dart';
 
 
 
@@ -88,66 +63,48 @@ class PersonagemApp extends StatelessWidget {
 
 
 
-class Ficha extends StatelessWidget {
+class Ficha extends StatefulWidget {
   const Ficha({super.key});
 
-  static const _example = FichasP(
-    nome: 'Julio',
-    forca: 10,
-    agilidade: 8,
-    inteligencia: 6,
-    classe: 'Guerreiro',
-    pvAtual: 35,
-    pvMax: 35,
-    ca: 18,
-    imagem: 'https://i.pinimg.com/736x/eb/01/04/eb01044783b72a4140d5fa80ec28f104.jpg',
-  );
-  static const _example2 = FichasP(
-    nome: 'Elara',
-    forca: 6,
-    agilidade: 12,
-    inteligencia: 10,
-    classe: 'Arqueira',
-    pvAtual: 22,
-    pvMax: 22,
-    ca: 18,
-    imagem: 'https://cdn.rafled.com/anime-icons/images/sN5EGhvu8EvZA35RXmT3tU8jQwOalzqK.jpg',
-  );
-  static const _example3 = FichasP(
-    nome: 'Lysandra',
-    forca: 5,
-    agilidade: 4,
-    inteligencia: 15,
-    classe: 'Curandeira',
-    pvAtual: 10,
-    pvMax: 10,
-    ca: 18,
-    imagem: 'https://cdn.rafled.com/anime-icons/images/f2avsZPYjzdLGSjT1Jrp63aKhRT8yyCW.jpg',
-  );
-static const _example4 = FichasP(
-    nome: 'Kael',
-    forca: 11,
-    agilidade: 13,
-    inteligencia: 12,
-    classe: 'Invocador',
-    pvAtual: 20,
-    pvMax: 20,
-    ca: 18,
-    imagem: 'https://images.cults3d.com/oB-W8h92wqml1soy2CeP5KL3gQQ=/516x516/filters:no_upscale():format(webp)/https://fbi.cults3d.com/uploaders/15449960/illustration-file/771a0ee5-c7a4-49c5-8b3a-6aea9fd34e31/images-2025-09-21T182621.668.jpg',
-  );
-  static const _example5 = FichasP(
-    nome: 'Thor',
-    forca: 10,
-    agilidade: 8,
-    inteligencia: 14,
-    classe: 'xãman',
-    pvAtual: 20,
-    pvMax: 20,
-    ca: 18,
-    imagem: 'https://pbs.twimg.com/profile_images/1052260285111779334/B_ME7cF8_400x400.jpg',
-  );
+  @override
+  State<Ficha> createState() => _FichaState();
+}
 
+class _FichaState extends State<Ficha> {
+  final _fichaApi = FichaApiFake();
+  final _fichaDao = FichaDao();
 
+  bool _loadingExemplos = true;
+  List<FichasP> _exemplos = [];
+
+  bool _loadingSalvas = true;
+  List<FichasP> _salvas = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _carregarExemplos();
+    _carregarSalvas();
+  }
+
+  Future<void> _carregarExemplos() async {
+    final lista = await _fichaApi.listarFichasExemplo();
+    if (!mounted) return;
+    setState(() {
+      _exemplos = lista;
+      _loadingExemplos = false;
+    });
+  }
+
+  Future<void> _carregarSalvas() async {
+    setState(() => _loadingSalvas = true);
+    final lista = await _fichaDao.listarFichas();
+    if (!mounted) return;
+    setState(() {
+      _salvas = lista;
+      _loadingSalvas = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -162,20 +119,37 @@ static const _example4 = FichasP(
               const SizedBox(height: 24),
               _SectionLabel('Fichas de Exemplo'),
               const SizedBox(height: 10),
-              PersonagemCard(FichaP: _example),
-              const SizedBox(height: 28),
-              PersonagemCard(FichaP: _example2),
-              const SizedBox(height: 28),
-              PersonagemCard(FichaP: _example3),
-              const SizedBox(height: 28),
-              PersonagemCard(FichaP: _example4),
-              const SizedBox(height: 28),
-              PersonagemCard(FichaP: _example5),
-              const SizedBox(height: 28),
+              if (_loadingExemplos)
+                const Center(child: CircularProgressIndicator(color: _gold))
+              else
+                for (final ficha in _exemplos) ...[
+                  PersonagemCard(FichaP: ficha),
+                  const SizedBox(height: 28),
+                ],
+              _SectionLabel('Minhas Fichas'),
+              const SizedBox(height: 10),
+              if (_loadingSalvas)
+                const Center(child: CircularProgressIndicator(color: _gold))
+              else if (_salvas.isEmpty)
+                Text(
+                  'Nenhuma ficha salva ainda. Crie uma abaixo.',
+                  style: TextStyle(color: _goldLight.withOpacity(0.8), fontSize: 13),
+                )
+              else
+                for (final ficha in _salvas) ...[
+                  PersonagemCard(FichaP: ficha),
+                  const SizedBox(height: 28),
+                ],
+              const SizedBox(height: 4),
               _SectionLabel('Criar Nova Ficha'),
               const SizedBox(height: 10),
 
-              _CriarFichaCard(),
+              _CriarFichaCard(onSalvo: _carregarSalvas),
+              const SizedBox(height: 28),
+              _SectionLabel('Itens'),
+              const SizedBox(height: 10),
+
+              _ItemSearchCard(),
             ],
           ),
         ),
@@ -528,11 +502,17 @@ class _Divider extends StatelessWidget {
 }
 
 class _CriarFichaCard extends StatefulWidget {
+  /// Called after a ficha has been saved to the database, so the parent
+  /// can refresh its "Minhas Fichas" list.
+  final VoidCallback? onSalvo;
+  const _CriarFichaCard({this.onSalvo});
+
   @override
   State<_CriarFichaCard> createState() => _CriarFichaCardState();
 }
 
 class _CriarFichaCardState extends State<_CriarFichaCard> {
+  final _dao = FichaDao();
   final _formKey = GlobalKey<FormState>();
   final _nome = TextEditingController();
   final _classe = TextEditingController();
@@ -545,22 +525,39 @@ class _CriarFichaCardState extends State<_CriarFichaCard> {
   final _imagem = TextEditingController();
 
   FichasP? _preview;
+  bool _salvando = false;
 
-  void _submit() {
-    if (_formKey.currentState!.validate()) {
+  Future<void> _submit() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    final ficha = FichasP(
+      nome: _nome.text.trim(),
+      classe: _classe.text.trim(),
+      forca: int.parse(_forca.text),
+      agilidade: int.parse(_agilidade.text),
+      inteligencia: int.parse(_inteligencia.text),
+      pvAtual: int.parse(_pvAtual.text),
+      pvMax: int.parse(_pvMax.text),
+      ca: int.parse(_ca.text),
+      imagem: _imagem.text.trim(),
+    );
+
+    setState(() => _salvando = true);
+
+    try {
+      final id = await _dao.inserirFicha(ficha);
+      if (!mounted) return;
       setState(() {
-        _preview = FichasP(
-          nome: _nome.text.trim(),
-          classe: _classe.text.trim(),
-          forca: int.parse(_forca.text),
-          agilidade: int.parse(_agilidade.text),
-          inteligencia: int.parse(_inteligencia.text),
-          pvAtual: int.parse(_pvAtual.text),
-          pvMax: int.parse(_pvMax.text),
-          ca: int.parse(_ca.text),
-          imagem: _imagem.text.trim(),
-        );
+        _preview = ficha.copyWith(id: id);
+        _salvando = false;
       });
+      widget.onSalvo?.call();
+    } catch (e) {
+      if (!mounted) return;
+      setState(() => _salvando = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Não foi possível salvar a ficha: $e')),
+      );
     }
   }
 
@@ -628,9 +625,16 @@ class _CriarFichaCardState extends State<_CriarFichaCard> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton.icon(
-                      onPressed: _submit,
-                      icon: const Icon(Icons.auto_fix_high, size: 16),
-                      label: const Text('Salvar ficha', style: TextStyle(letterSpacing: 2, fontWeight: FontWeight.w800)),
+                      onPressed: _salvando ? null : _submit,
+                      icon: _salvando
+                          ? const SizedBox(
+                              width: 16,
+                              height: 16,
+                              child: CircularProgressIndicator(strokeWidth: 2, color: _goldLight),
+                            )
+                          : const Icon(Icons.auto_fix_high, size: 16),
+                      label: Text(_salvando ? 'Salvando...' : 'Salvar ficha',
+                          style: const TextStyle(letterSpacing: 2, fontWeight: FontWeight.w800)),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: _inkDark,
                         foregroundColor: _goldLight,
@@ -661,6 +665,196 @@ class _CriarFichaCardState extends State<_CriarFichaCard> {
             ),
           ],
         ],
+      ),
+    );
+  }
+}
+
+class _ItemSearchCard extends StatefulWidget {
+  @override
+  State<_ItemSearchCard> createState() => _ItemSearchCardState();
+}
+
+class _ItemSearchCardState extends State<_ItemSearchCard> {
+  final _api = ItemsApi();
+  final _query = TextEditingController();
+
+  bool _loading = false;
+  String? _error;
+  Items? _item;
+
+  Future<void> _search() async {
+    final name = _query.text.trim();
+    if (name.isEmpty) {
+      setState(() => _error = 'Digite o nome do item');
+      return;
+    }
+
+    setState(() {
+      _loading = true;
+      _error = null;
+      _item = null;
+    });
+
+    final result = await _api.findByName(name);
+
+    if (!mounted) return;
+    setState(() {
+      _loading = false;
+      _item = result;
+      _error = result == null ? 'Item não encontrado' : null;
+    });
+  }
+
+  @override
+  void dispose() {
+    _query.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: _cardBg,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: _gold.withOpacity(0.4), width: 1.5),
+        boxShadow: const [BoxShadow(color: _shadow, blurRadius: 8, offset: Offset(0, 3))],
+      ),
+      child: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            decoration: const BoxDecoration(
+              color: _inkMid,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+            ),
+            child: const Row(
+              children: [
+                Icon(Icons.inventory_2, color: _goldLight, size: 18),
+                SizedBox(width: 8),
+                Text('BUSCAR ITEM',
+                    style: TextStyle(color: _goldLight, fontSize: 13, letterSpacing: 2, fontWeight: FontWeight.w700)),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _query,
+                        onSubmitted: (_) => _search(),
+                        decoration: const InputDecoration(
+                          labelText: 'Nome do item',
+                          hintText: 'Ex: Espada Longa',
+                        ),
+                        style: const TextStyle(fontSize: 14, color: _inkDark),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    SizedBox(
+                      height: 48,
+                      child: ElevatedButton(
+                        onPressed: _loading ? null : _search,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: _inkDark,
+                          foregroundColor: _goldLight,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: const BorderSide(color: _gold),
+                          ),
+                        ),
+                        child: _loading
+                            ? const SizedBox(
+                                width: 18,
+                                height: 18,
+                                child: CircularProgressIndicator(strokeWidth: 2, color: _goldLight),
+                              )
+                            : const Icon(Icons.search, size: 18),
+                      ),
+                    ),
+                  ],
+                ),
+                if (_error != null) ...[
+                  const SizedBox(height: 10),
+                  Text(_error!, style: const TextStyle(color: _crimson, fontSize: 13)),
+                ],
+                if (_item != null) ...[
+                  const SizedBox(height: 14),
+                  _Divider(),
+                  const SizedBox(height: 14),
+                  _ItemResultTile(item: _item!),
+                ],
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ItemResultTile extends StatelessWidget {
+  final Items item;
+  const _ItemResultTile({required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: _inkDark,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: _gold.withOpacity(0.4)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            item.name,
+            style: const TextStyle(color: _goldLight, fontSize: 16, fontWeight: FontWeight.w800),
+          ),
+          const SizedBox(height: 6),
+          Wrap(
+            spacing: 8,
+            runSpacing: 6,
+            children: [
+              _ItemTag(label: 'Tipo', value: item.type),
+              _ItemTag(label: 'Slot', value: item.slot),
+              _ItemTag(label: 'Rank', value: item.rank),
+              _ItemTag(label: 'Raridade', value: item.rarity),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ItemTag extends StatelessWidget {
+  final String label;
+  final String value;
+  const _ItemTag({required this.label, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    if (value.isEmpty) return const SizedBox.shrink();
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: _gold.withOpacity(0.15),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Text(
+        '$label: $value',
+        style: const TextStyle(color: _goldLight, fontSize: 11, fontWeight: FontWeight.w600),
       ),
     );
   }
