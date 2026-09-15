@@ -1,5 +1,5 @@
 class Monstros {
-  final String index;
+ final String index;
  final String name;
  final String  url;
 
@@ -15,6 +15,5 @@ factory Monstros.fromJson(Map<String,dynamic> json){
   name: json['name'] ?? '',
   url: json['url'] ?? '',
   );
-
 }
 }
