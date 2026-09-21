@@ -6,7 +6,7 @@ class classepi {
   String baseUrl = 'https://www.dnd5eapi.co/api/2014/classes';
 
   findByClasse(String classe) async {
-    late Persoapi persoapi;
+late Persoapi persoapi;
     final response = await dio.get('$baseUrl/ws/$classe/json/');
 
     if (response.statusCode == 200) {
