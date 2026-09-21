@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 
 class monstrosapi {
   final dio = Dio();
-  String baseUrl = 'https://www.dnd5eapi.co/api/2014/monsters';
+  String baseUrl = 'https://www.dnd5eapi.co/api';
 
   findByname(String nome) async {
     late Monstros monstros;

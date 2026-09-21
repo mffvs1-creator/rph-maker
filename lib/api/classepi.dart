@@ -1,18 +1,23 @@
-import 'package:rpgmaker/api/persoapi.dart';
+import 'package:rpgmaker/api/classe.dart';
 import 'package:dio/dio.dart';
 
-class classepi {
+class ClasseApi {
   final dio = Dio();
-  String baseUrl = 'https://www.dnd5eapi.co/api/2014/classes';
+  String baseUrl = 'https://www.dnd5eapi.co/api';
 
-  findByClasse(String classe) async {
-late Persoapi persoapi;
-    final response = await dio.get('$baseUrl/ws/$classe/json/');
+  Future<List<Classe>> listarClasses() async {
+    List<Classe> classes = [];
+    final response = await dio.get('$baseUrl/2014/classes');
 
     if (response.statusCode == 200) {
-      persoapi = Persoapi.fromJson(response.data);
+      var dados = response.data.results;
+      if (dados is List) {
+        for (var item in response.data) {
+          classes.add(Classe.fromJson(item));
+        }
+      }
     }
 
-    return persoapi;
+    return classes;
   }
   }

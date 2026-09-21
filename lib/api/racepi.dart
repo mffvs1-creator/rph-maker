@@ -1,13 +1,13 @@
-import 'package:rpgmaker/api/persoapi.dart';
+import 'package:rpgmaker/api/classe.dart';
 import 'package:dio/dio.dart';
 
 class racepi {
  final dio = Dio();
- String baseUrl = 'https://www.dnd5eapi.co/api/2014/classes';
+ String baseUrl = 'https://www.dnd5eapi.co/api';
 
- findByCep(String nome) async {
+ findByraca(String raca) async {
   late Persoapi persoapi;
-  final response = await dio.get('$baseUrl/ws/$nome/json/');
+  final response = await dio.get('$baseUrl/ws/$raca/json/');
 
   if (response.statusCode == 200) {
    persoapi = Persoapi.fromJson(response.data);

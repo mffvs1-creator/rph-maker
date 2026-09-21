@@ -33,7 +33,7 @@ class _MapaState extends State<Mapa> {
     await _banco.atualizarStatus(id, novoStatus);
     _carregarLocais();
   }
-
+//eu fiz sem dio hahahhhahaahaaaaaaaaaaaaaaaaaaaaaaa
   void _abrirQuadroMissoes(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -129,7 +129,7 @@ class _MapaState extends State<Mapa> {
       default: return Colors.blue;
     }
   }
-
+//final dessa coisa que eu fiz com muito odio
   @override
   Widget build(BuildContext context) {
     return Scaffold(

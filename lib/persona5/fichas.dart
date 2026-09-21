@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rpgmaker/persona5/personagem_model.dart';
 import 'package:rpgmaker/db_ficha/fichadao.dart';
 import 'package:rpgmaker/api/apifake/items.dart';
-import 'package:rpgmaker/api/apifake/fichaapi.dart';
 import 'package:rpgmaker/api/itemsapi.dart';
 
 
