@@ -16,9 +16,7 @@ class DBHelperFicha {
   }
 
   Future<void> onCreateDB(Database db, int version) async {
-    // Table for fichas the user creates in the app. The example fichas
-    // shown on the home screen come from FichaApiFake, not this table —
-    // this only stores fichas the player actually saves.
+
     String sql = '''CREATE TABLE FICHA (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       nome TEXT,
@@ -41,7 +39,7 @@ class DBHelperFicha {
 
     await db.execute(sql);
 
-    sql = "INSERT INTO USER (username, password) VALUES ('Hangolanu', '40028922');";
+    sql = "INSERT INTO USER (username, password) VALUES ('ademar@gmail.com', '654321');";
     await db.execute(sql);
   }
 }

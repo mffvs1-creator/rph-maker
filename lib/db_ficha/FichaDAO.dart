@@ -1,9 +1,9 @@
-import 'package:rpgmaker/persona5/personagem_model.dart';
+import 'package:rpgmaker/persona5/ficha_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'db_helperficha.dart';
 
-/// CRUD access to the FICHA table (fichas the player has saved).
+
 class FichaDao {
   Future<List<FichasP>> listarFichas() async {
     Database db = await DBHelperFicha().initDB();
@@ -13,7 +13,6 @@ class FichaDao {
     return result.map((row) => FichasP.fromMap(row)).toList();
   }
 
-  /// Inserts a new ficha and returns the row id sqflite assigned it.
   Future<int> inserirFicha(FichasP ficha) async {
     Database db = await DBHelperFicha().initDB();
 
