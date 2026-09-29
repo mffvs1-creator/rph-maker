@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rpgmaker/home/db_helper.dart';
 import 'package:rpgmaker/home/opcoes.dart';
+import 'package:rpgmaker/persona5/tela_personagens.dart';
 import '../utilidades/matasrod.dart';
 
 import 'home_dao.dart';
@@ -105,6 +106,13 @@ class _MenuScreenState extends State<MenuScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => const Mapa(),
+                ),
+              );
+            } else if (text == "Personagens") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const TelaPersonagens(),
                 ),
               );
             }

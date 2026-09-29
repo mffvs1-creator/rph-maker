@@ -1,4 +1,4 @@
-import 'package:rpgmaker/api/classe.dart';
+import 'package:rpgmaker/api/raca.dart';
 import 'package:dio/dio.dart';
 
 class racepi {
@@ -6,13 +6,13 @@ class racepi {
  String baseUrl = 'https://www.dnd5eapi.co/api';
 
  findByraca(String raca) async {
-  late Persoapi persoapi;
+  late Raca racapi;
   final response = await dio.get('$baseUrl/ws/$raca/json/');
 
   if (response.statusCode == 200) {
-   persoapi = Persoapi.fromJson(response.data);
+   racapi = Raca.fromJson(response.data);
   }
 
-  return persoapi;
+  return racapi;
  }
 }

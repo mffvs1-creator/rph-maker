@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:rpgmaker/home/loginpage.dart';
-import 'package:rpgmaker/home/teia_inicial.dart';
-import 'persona5/tela_personagens.dart';
-import 'persona5/pagina_luta.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() {
+  //sqfliteFfiInit(); para inutilizar o sqflite no desktop em outros sistemas
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    databaseFactory = databaseFactoryFfi;
+  }
+
   runApp(const MeuAppRPG());
 }
 

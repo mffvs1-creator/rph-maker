@@ -81,8 +81,8 @@ class _HomePageState extends State<HomePage> {
 
   int selectedIndex = 0;
 
-  late List pages = [
-    TelaPersonagens(),
+  late List<Widget> pages = [
+    const TelaPersonagens(),
     TelaLuta(personagens: personagens),
     DiceRollerHome(),
     Ficha(),

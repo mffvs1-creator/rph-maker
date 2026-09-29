@@ -1,5 +1,5 @@
 class Classe {
-  final int index;
+  final String index;
   final String name;
   final String url;
 
@@ -11,9 +11,9 @@ class Classe {
 
   factory Classe.fromJson(Map<String, dynamic> json) {
     return Classe(
-      index: json['index'] ?? 0,
-      name: json['name'] ?? '',
-      url: json['url'] ?? '',
+      index: (json['index'] ?? '').toString(),
+      name: (json['name'] ?? '').toString(),
+      url: (json['url'] ?? '').toString(),
     );
   }
 }
